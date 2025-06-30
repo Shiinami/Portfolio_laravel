@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Portofolio;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+
+class portofolioController extends Controller
+{
+    public function index()
+    {
+        $items = Portofolio::all();
+
+        // Ambil data API teman
+        $profile = null;
+        $friendPortfolios = [];
+        try {
+            $response = \Illuminate\Support\Facades\Http::withoutVerifying()->get('https://deva-syaiful.my.id/api/profile-export');
+            if ($response->successful()) {
+                $apiData = $response->json();
+                $profile = $apiData['profile'] ?? null;
+                $friendPortfolios = $apiData['portfolios'] ?? [];
+            }
+        } catch (\Exception $e) {
+            // Jika gagal ambil API, biarkan profile dan friendPortfolios null/empty
+        }
+
+        return view('layout.app', [
+            'items' => $items,
+            'profile' => $profile,
+            'friendPortfolios' => $friendPortfolios
+        ]);
+    }
+    public function store(Request $request)
+{
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'image' => 'required|image|mimes:jpg,png,jpeg,webp,svg|max:2048',
+        'category' => 'required|string',
+    ]);
+
+    $data['image'] = $request->file('image')->store('portfolio', 'public');
+    Portofolio::create($data);
+
+    return redirect()->back();
+}
+
+public function destroy($id)
+{
+    $item = Portofolio::findOrFail($id);
+    Storage::disk('public')->delete($item->image);
+    $item->delete();
+
+    return redirect()->back();
+}
+
+public function showFriendsProfile()
+{
+
+}
+}
