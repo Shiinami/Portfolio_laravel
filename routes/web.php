@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/portfolio', [portofolioController::class, 'store'])->name('item.store');
     Route::delete('/portfolio/{item}', [portofolioController::class, 'destroy'])->name('item.destroy');
     Route::get('/portfolio/{item}', [portofolioController::class, 'show'])->name('item.show');
+    Route::patch('/portfolio/{item}', [portofolioController::class, 'update'])->name('item.update');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

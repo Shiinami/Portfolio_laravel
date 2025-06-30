@@ -430,7 +430,7 @@
 
                         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
                             @foreach ($items as $item)
-                                <div class="col-lg-4 col-md-6 portfolio-item isotope-item {{ $item->category }}">
+                                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $item->category }}">
                                     <div class="portfolio-content h-100">
                                         <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid"
                                             alt="">
@@ -487,7 +487,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                     onclick="closeModal()"></button>
                             </div>
-                            <form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
+                            <form id="portfolio-form" action="{{ route('item.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
                                     <input type="hidden" name="id" id="item-id">
@@ -509,10 +510,10 @@
                                     <div class="mb-3">
                                         <label for="item-category" class="form-label">Category</label>
                                         <select name="category" id="item-category" class="form-select">
-                                            <option value="app">App</option>
-                                            <option value="product">Product</option>
-                                            <option value="branding">Branding</option>
-                                            <option value="books">Books</option>
+                                            <option value="app">app</option>
+                                            <option value="product">product</option>
+                                            <option value="branding">branding</option>
+                                            <option value="books">books</option>
                                         </select>
                                     </div>
                                 </div>
@@ -903,7 +904,8 @@
     <script>
         function openModal(mode) {
             var modal = document.getElementById('modal-form');
-            if (modal) {
+            var form = document.getElementById('portfolio-form');
+            if (modal && form) {
                 if (window.bootstrap && bootstrap.Modal) {
                     var bsModal = bootstrap.Modal.getOrCreateInstance(modal);
                     bsModal.show();
@@ -912,23 +914,30 @@
                 }
                 if (mode === 'add') {
                     document.getElementById('modal-title').innerText = 'Add Portfolio';
+                    form.action = "{{ route('item.store') }}";
+                    form.method = "POST";
                     document.getElementById('item-id').value = '';
                     document.getElementById('item-title').value = '';
                     document.getElementById('item-description').value = '';
                     document.getElementById('item-image').value = '';
                     document.getElementById('item-category').selectedIndex = 0;
+                    // Remove _method if exists
+                    let methodInput = document.querySelector('#portfolio-form input[name="_method"]');
+                    if (methodInput) methodInput.remove();
                 }
             }
         }
 
         function editItem(id, title, description, image, category) {
             var modal = document.getElementById('modal-form');
-            if (modal) {
+            var form = document.getElementById('portfolio-form');
+            if (modal && form) {
                 document.getElementById('modal-title').innerText = 'Edit Portfolio';
+                form.action = "/portfolio/" + id;
+                form.method = "POST";
                 document.getElementById('item-id').value = id;
                 document.getElementById('item-title').value = title;
                 document.getElementById('item-description').value = description;
-                // File input tidak bisa di-set value karena alasan keamanan, jadi biarkan kosong
                 document.getElementById('item-image').value = '';
                 var select = document.getElementById('item-category');
                 if (select) {
@@ -939,6 +948,16 @@
                         }
                     }
                 }
+                // Tambahkan input _method PATCH untuk update
+                let methodInput = document.querySelector('#portfolio-form input[name="_method"]');
+                if (!methodInput) {
+                    methodInput = document.createElement('input');
+                    methodInput.type = 'hidden';
+                    methodInput.name = '_method';
+                    form.appendChild(methodInput);
+                }
+                methodInput.value = 'PATCH';
+
                 if (window.bootstrap && bootstrap.Modal) {
                     var bsModal = bootstrap.Modal.getOrCreateInstance(modal);
                     bsModal.show();

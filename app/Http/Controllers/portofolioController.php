@@ -57,8 +57,18 @@ public function destroy($id)
     return redirect()->back();
 }
 
-public function showFriendsProfile()
+public function update(Request $request, $id)
 {
-
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'category' => 'required|string',
+        'image' => 'nullable|image|max:2048',
+    ]);
+    $item = Portofolio::findOrFail($id);
+    $item->update($data);
+    // handle image jika ada
+    return redirect()->route('home')->with('success', 'Portfolio berhasil diupdate!');
 }
+
 }
