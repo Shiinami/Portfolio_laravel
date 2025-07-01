@@ -108,31 +108,34 @@
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 @auth
 
-                <div class="biodata-controls" style="margin-bottom: 20px;">
-    @if (!$biodata)
-        <button class="open-profile-btn" onclick="openBiodataModal('add')">Tambah Biodata</button>
-    @else
-        <button class="open-profile-btn" onclick="openBiodataModal('edit')">Edit Biodata</button>
+                    <div class="biodata-controls" style="margin-bottom: 20px;">
+                        @if (!$biodata)
+                            <button class="open-profile-btn" onclick="openBiodataModal('add')">Tambah Biodata</button>
+                        @else
+                            <button class="open-profile-btn" onclick="openBiodataModal('edit')">Edit Biodata</button>
 
-        <form method="POST" action="{{ route('biodata.destroy', $biodata->id) }}" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="open-profile-btn" style="background-color: #b02a37;">
-                Hapus Biodata
-            </button>
-        </form>
-    @endif
-</div>
-                    @endauth
+                            <form method="POST" action="{{ route('biodata.destroy', $biodata->id) }}"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="open-profile-btn" style="background-color: #b02a37;">
+                                    Hapus Biodata
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                @endauth
 
                 <div class="row gy-4 justify-content-center">
                     <div class="col-lg-4">
-                        <img src="{{ $biodata && $biodata->pic ? asset('storage/' . $biodata->pic) : asset('assets/img/profile.jpeg') }}" class="img-fluid" alt="">
+                        <img src="{{ $biodata && $biodata->pic ? asset('storage/' . $biodata->pic) : asset('assets/img/profile.jpeg') }}"
+                            class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-8 content">
                         <h2>UI/UX Designer &amp; Graphic Designer.</h2>
                         <p class="fst-italic py-3">
-                            {{ $biodata->bio ?? '' }} I'am a college student from Institut Teknologi dan Kesehatan Rumah Sakit dr. Soepraoen. I'am
+                            {{ $biodata->bio ?? '' }} I'am a college student from Institut Teknologi dan Kesehatan Rumah
+                            Sakit dr. Soepraoen. I'am
                             a UI/UX Designer and Graphic Designer. I love to design something that can be useful for
                             people. I <del>don't</del> have experience in creating UI/UX design, graphic design, and
                             video editing.
@@ -140,16 +143,22 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>{{ $biodata->birth_date ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{{ $biodata->website ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>{{ $biodata->phone ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{ $biodata->address ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong>
+                                        <span>{{ $biodata->birth_date ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong>
+                                        <span>{{ $biodata->website ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong>
+                                        <span>{{ $biodata->phone ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong>
+                                        <span>{{ $biodata->address ?? '' }}</span></li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{{ $biodata->age ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ $biodata->degree ?? '' }}</span>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong>
+                                        <span>{{ $biodata->age ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong>
+                                        <span>{{ $biodata->degree ?? '' }}</span>
                                     </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
                                         <span>{{ $biodata->email ?? '' }}</span>
@@ -160,14 +169,15 @@
                                 </ul>
                             </div>
                             <div class="signature mt-4">
-                <div class="signature-image">
-                  <img src="{{ asset('assets/img/signature.png') }}" alt="Signature" class="img-fluid">
-                </div>
-                <div class="signature-info">
-                  <h4>{{ $biodata->name ?? '' }}</h4>
-                  <p>Student, Indonesia</p>
-                </div>
-              </div>
+                                <div class="signature-image">
+                                    <img src="{{ asset('assets/img/signature.png') }}" alt="Signature"
+                                        class="img-fluid">
+                                </div>
+                                <div class="signature-info">
+                                    <h4>{{ $biodata->name ?? '' }}</h4>
+                                    <p>Student, Indonesia</p>
+                                </div>
+                            </div>
 
                         </div>
                         <p class="py-3">
@@ -185,59 +195,71 @@
 
         @auth
 
-<div id="biodataModal" class="modal-overlay">
-    <div class="modal-box">
-        <span class="modal-close" onclick="closeBiodataModal()">&times;</span>
+            <div id="biodataModal" class="modal-overlay">
+                <div class="modal-box">
+                    <span class="modal-close" onclick="closeBiodataModal()">&times;</span>
 
-        <h2 id="modalBiodataTitle">Tambah/Edit Biodata</h2>
+                    <h2 id="modalBiodataTitle">Tambah/Edit Biodata</h2>
 
-        <form id="biodata-form" method="POST" action="{{ $biodata ? route('biodata.update', $biodata->id) : route('biodata.store') }}" enctype="multipart/form-data">
-            @csrf
-            @if($biodata)
-                @method('PATCH') {{-- Gunakan PATCH agar konsisten --}}
-            @endif
+                    <form id="biodata-form" method="POST"
+                        action="{{ $biodata ? route('biodata.update', $biodata->id) : route('biodata.store') }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @if ($biodata)
+                            @method('PATCH') {{-- Gunakan PATCH agar konsisten --}}
+                        @endif
 
-            <div class="modal-body">
-                <label>Foto:</label>
-                <input type="file" name="pic" class="form-input"><br><br>
+                        <div class="modal-body">
+                            <label>Foto:</label>
+                            <input type="file" name="pic" class="form-input"><br><br>
 
-                <label>Nama:</label>
-                <input type="text" name="name" value="{{ old('name', $biodata->name ?? '') }}" class="form-input">
+                            <label>Nama:</label>
+                            <input type="text" name="name" value="{{ old('name', $biodata->name ?? '') }}"
+                                class="form-input">
 
-                <label>Bio:</label>
-                <textarea name="bio" rows="3" class="form-input">{{ old('bio', $biodata->bio ?? '') }}</textarea>
+                            <label>Bio:</label>
+                            <textarea name="bio" rows="3" class="form-input">{{ old('bio', $biodata->bio ?? '') }}</textarea>
 
-                <label>Birth Date:</label>
-                <input type="date" name="birth_date" value="{{ old('birth_date', $biodata->birth_date ?? '') }}" class="form-input">
+                            <label>Birth Date:</label>
+                            <input type="date" name="birth_date"
+                                value="{{ old('birth_date', $biodata->birth_date ?? '') }}" class="form-input">
 
-                <label>Age:</label>
-                <input type="number" name="age" value="{{ old('age', $biodata->age ?? '') }}" class="form-input">
+                            <label>Age:</label>
+                            <input type="number" name="age" value="{{ old('age', $biodata->age ?? '') }}"
+                                class="form-input">
 
-                <label>Website:</label>
-                <input type="text" name="website" value="{{ old('website', $biodata->website ?? '') }}" class="form-input">
+                            <label>Website:</label>
+                            <input type="text" name="website" value="{{ old('website', $biodata->website ?? '') }}"
+                                class="form-input">
 
-                <label>Degree:</label>
-                <input type="text" name="degree" value="{{ old('degree', $biodata->degree ?? '') }}" class="form-input">
+                            <label>Degree:</label>
+                            <input type="text" name="degree" value="{{ old('degree', $biodata->degree ?? '') }}"
+                                class="form-input">
 
-                <label>Phone:</label>
-                <input type="text" name="phone" value="{{ old('phone', $biodata->phone ?? '') }}" class="form-input">
+                            <label>Phone:</label>
+                            <input type="text" name="phone" value="{{ old('phone', $biodata->phone ?? '') }}"
+                                class="form-input">
 
-                <label>Email:</label>
-                <input type="email" name="email" value="{{ old('email', $biodata->email ?? '') }}" class="form-input">
+                            <label>Email:</label>
+                            <input type="email" name="email" value="{{ old('email', $biodata->email ?? '') }}"
+                                class="form-input">
 
-                <label>Address:</label>
-                <input type="text" name="address" value="{{ old('address', $biodata->address ?? '') }}" class="form-input">
+                            <label>Address:</label>
+                            <input type="text" name="address" value="{{ old('address', $biodata->address ?? '') }}"
+                                class="form-input">
 
-                <label>Freelance:</label>
-                <input type="text" name="freelance" value="{{ old('freelance', $biodata->freelance ?? '') }}" class="form-input">
+                            <label>Freelance:</label>
+                            <input type="text" name="freelance"
+                                value="{{ old('freelance', $biodata->freelance ?? '') }}" class="form-input">
 
-                <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾 Simpan</button>
+                            <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾
+                                Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-    </div>
-</div>
 
-@endauth
+        @endauth
 
         <!-- Stats Section -->
         <section id="stats" class="stats section">
@@ -1084,21 +1106,21 @@
         });
     </script>
 
-<script>
-    function openBiodataModal(mode) {
-        document.getElementById('biodataModal').style.display = 'block';
-        document.getElementById('modalBiodataTitle').innerText = mode === 'edit' ? 'Edit Biodata' : 'Tambah Biodata';
-    }
+    <script>
+        function openBiodataModal(mode) {
+            document.getElementById('biodataModal').style.display = 'block';
+            document.getElementById('modalBiodataTitle').innerText = mode === 'edit' ? 'Edit Biodata' : 'Tambah Biodata';
+        }
 
-    function closeBiodataModal() {
-        document.getElementById('biodataModal').style.display = 'none';
-    }
+        function closeBiodataModal() {
+            document.getElementById('biodataModal').style.display = 'none';
+        }
 
-    window.onclick = function(e) {
-        const modal = document.getElementById('biodataModal');
-        if (e.target === modal) modal.style.display = 'none';
-    }
-</script>
+        window.onclick = function(e) {
+            const modal = document.getElementById('biodataModal');
+            if (e.target === modal) modal.style.display = 'none';
+        }
+    </script>
 
 </body>
 
