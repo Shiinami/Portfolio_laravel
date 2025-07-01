@@ -14,6 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/portfolio/{item}', [portofolioController::class, 'show'])->name('item.show');
     Route::patch('/portfolio/{item}', [portofolioController::class, 'update'])->name('item.update');
 
+
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -21,6 +22,15 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard (jika ingin dashboard khusus user login)
     Route::get('/dashboard', [portofolioController::class, 'index'])->middleware('verified')->name('dashboard');
+
+    // Biodata
+    Route::post('/biodata', [portofolioController::class, 'biodataStore'])->name('biodata.store');
+    Route::patch('/biodata/{id}', [portofolioController::class, 'biodataUpdate'])->name('biodata.update');
+    Route::put('/biodata/{id}', [portofolioController::class, 'biodataUpdate']); // Tambahkan baris ini
+    Route::delete('/biodata/{id}', [portofolioController::class, 'biodataDestroy'])->name('biodata.destroy');
+
 });
+
+
 
 require __DIR__.'/auth.php';

@@ -27,7 +27,7 @@
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/main.css')); ?>" rel="stylesheet">
 
 </head>
 
@@ -38,19 +38,19 @@
 
         <div class="profile-img position-relative">
             <img src="assets/img/profile.jpeg" alt="" class="img-fluid rounded-circle">
-            @if (Auth::check())
-                <form action="{{ route('logout') }}" method="POST"
+            <?php if(Auth::check()): ?>
+                <form action="<?php echo e(route('logout')); ?>" method="POST"
                     style="position: absolute; top: 10px; left: 10px; z-index: 10;">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <button type="submit" class="btn btn-danger btn-sm"></button>
                 </form>
-            @else
-                <a href="{{ url('/login') }}" id="login-btn" class="btn btn-primary btn-sm position-absolute"
+            <?php else: ?>
+                <a href="<?php echo e(url('/login')); ?>" id="login-btn" class="btn btn-primary btn-sm position-absolute"
                     style="top: 10px; left: 10px; z-index: 10;"></a>
-            @endif
+            <?php endif; ?>
         </div>
 
-        <a href="{{ route('home') }}" class="logo d-flex align-items-center justify-content-center">
+        <a href="<?php echo e(route('home')); ?>" class="logo d-flex align-items-center justify-content-center">
             <!-- Uncomment the line below if you also wish to use an image logo -->
             <img src="assets/img/borgar.png" alt="">
             <h1 class="sitename">Deva Muhamad S.A</h1>
@@ -106,33 +106,33 @@
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-                @auth
+                <?php if(auth()->guard()->check()): ?>
 
                 <div class="biodata-controls" style="margin-bottom: 20px;">
-    @if (!$biodata)
+    <?php if(!$biodata): ?>
         <button class="open-profile-btn" onclick="openBiodataModal('add')">Tambah Biodata</button>
-    @else
+    <?php else: ?>
         <button class="open-profile-btn" onclick="openBiodataModal('edit')">Edit Biodata</button>
 
-        <form method="POST" action="{{ route('biodata.destroy', $biodata->id) }}" style="display:inline;">
-            @csrf
-            @method('DELETE')
+        <form method="POST" action="<?php echo e(route('biodata.destroy', $biodata->id)); ?>" style="display:inline;">
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('DELETE'); ?>
             <button type="submit" class="open-profile-btn" style="background-color: #b02a37;">
                 Hapus Biodata
             </button>
         </form>
-    @endif
+    <?php endif; ?>
 </div>
-                    @endauth
+                    <?php endif; ?>
 
                 <div class="row gy-4 justify-content-center">
                     <div class="col-lg-4">
-                        <img src="{{ $biodata->pic ?? 'assets/img/profile.jpeg'  }}" class="img-fluid" alt="">
+                        <img src="<?php echo e($biodata->pic ?? 'assets/img/profile.jpeg'); ?>" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-8 content">
                         <h2>UI/UX Designer &amp; Graphic Designer.</h2>
                         <p class="fst-italic py-3">
-                            {{ $biodata->bio }} I'am a college student from Institut Teknologi dan Kesehatan Rumah Sakit dr. Soepraoen. I'am
+                            <?php echo e($biodata->bio); ?> I'am a college student from Institut Teknologi dan Kesehatan Rumah Sakit dr. Soepraoen. I'am
                             a UI/UX Designer and Graphic Designer. I love to design something that can be useful for
                             people. I <del>don't</del> have experience in creating UI/UX design, graphic design, and
                             video editing.
@@ -140,22 +140,22 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>{{ $biodata->birth_date }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{{ $biodata->website }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>{{ $biodata->phone }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{ $biodata->address }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span><?php echo e($biodata->birth_date); ?></span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span><?php echo e($biodata->website); ?></span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span><?php echo e($biodata->phone); ?></span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span><?php echo e($biodata->address); ?></span></li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{{ $biodata->age }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ $biodata->degree }}</span>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span><?php echo e($biodata->age); ?></span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span><?php echo e($biodata->degree); ?></span>
                                     </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
-                                        <span>{{ $biodata->email }}</span>
+                                        <span><?php echo e($biodata->email); ?></span>
                                     </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong>
-                                        <span>{{ $biodata->freelance }}</span>
+                                        <span><?php echo e($biodata->freelance); ?></span>
                                     </li>
                                 </ul>
                             </div>
@@ -173,7 +173,7 @@
 
         </section><!-- /About Section -->
 
-        @auth
+        <?php if(auth()->guard()->check()): ?>
 
 <div id="biodataModal" class="modal-overlay">
     <div class="modal-box">
@@ -181,45 +181,45 @@
 
         <h2 id="modalBiodataTitle">Tambah/Edit Biodata</h2>
 
-        <form id="biodata-form" method="POST" action="{{ $biodata ? route('biodata.update', $biodata->id) : route('biodata.store') }}" enctype="multipart/form-data">
-            @csrf
-            @if($biodata)
-                @method('PATCH') {{-- Gunakan PATCH agar konsisten --}}
-            @endif
+        <form id="biodata-form" method="POST" action="<?php echo e($biodata ? route('biodata.update', $biodata->id) : route('biodata.store')); ?>" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
+            <?php if($biodata): ?>
+                <?php echo method_field('PATCH'); ?> 
+            <?php endif; ?>
 
             <div class="modal-body">
                 <label>Foto:</label>
                 <input type="file" name="pic" class="form-input"><br><br>
 
                 <label>Nama:</label>
-                <input type="text" name="name" value="{{ old('name', $biodata->name ?? '') }}" class="form-input">
+                <input type="text" name="name" value="<?php echo e(old('name', $biodata->name ?? '')); ?>" class="form-input">
 
                 <label>Bio:</label>
-                <textarea name="bio" rows="3" class="form-input">{{ old('bio', $biodata->bio ?? '') }}</textarea>
+                <textarea name="bio" rows="3" class="form-input"><?php echo e(old('bio', $biodata->bio ?? '')); ?></textarea>
 
                 <label>Birth Date:</label>
-                <input type="date" name="birth_date" value="{{ old('birth_date', $biodata->birth_date ?? '') }}" class="form-input">
+                <input type="date" name="birth_date" value="<?php echo e(old('birth_date', $biodata->birth_date ?? '')); ?>" class="form-input">
 
                 <label>Age:</label>
-                <input type="number" name="age" value="{{ old('age', $biodata->age ?? '') }}" class="form-input">
+                <input type="number" name="age" value="<?php echo e(old('age', $biodata->age ?? '')); ?>" class="form-input">
 
                 <label>Website:</label>
-                <input type="text" name="website" value="{{ old('website', $biodata->website ?? '') }}" class="form-input">
+                <input type="text" name="website" value="<?php echo e(old('website', $biodata->website ?? '')); ?>" class="form-input">
 
                 <label>Degree:</label>
-                <input type="text" name="degree" value="{{ old('degree', $biodata->degree ?? '') }}" class="form-input">
+                <input type="text" name="degree" value="<?php echo e(old('degree', $biodata->degree ?? '')); ?>" class="form-input">
 
                 <label>Phone:</label>
-                <input type="text" name="phone" value="{{ old('phone', $biodata->phone ?? '') }}" class="form-input">
+                <input type="text" name="phone" value="<?php echo e(old('phone', $biodata->phone ?? '')); ?>" class="form-input">
 
                 <label>Email:</label>
-                <input type="email" name="email" value="{{ old('email', $biodata->email ?? '') }}" class="form-input">
+                <input type="email" name="email" value="<?php echo e(old('email', $biodata->email ?? '')); ?>" class="form-input">
 
                 <label>Address:</label>
-                <input type="text" name="address" value="{{ old('address', $biodata->address ?? '') }}" class="form-input">
+                <input type="text" name="address" value="<?php echo e(old('address', $biodata->address ?? '')); ?>" class="form-input">
 
                 <label>Freelance:</label>
-                <input type="text" name="freelance" value="{{ old('freelance', $biodata->freelance ?? '') }}" class="form-input">
+                <input type="text" name="freelance" value="<?php echo e(old('freelance', $biodata->freelance ?? '')); ?>" class="form-input">
 
                 <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾 Simpan</button>
             </div>
@@ -227,7 +227,7 @@
     </div>
 </div>
 
-@endauth
+<?php endif; ?>
 
         <!-- Stats Section -->
         <section id="stats" class="stats section">
@@ -455,35 +455,35 @@
                 </div><!-- End Section Title -->
 
                 <!-- Notifikasi Sukses/Hapus -->
-                @if (session('success'))
+                <?php if(session('success')): ?>
                     <div class="container">
                         <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mt-3"
                             role="alert" style="font-size:1.1rem;">
                             <i class="bi bi-check-circle-fill me-2"></i>
-                            <div>{{ session('success') }}</div>
+                            <div><?php echo e(session('success')); ?></div>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
                                 aria-label="Close"></button>
                         </div>
                     </div>
-                @endif
-                @if (session('error'))
+                <?php endif; ?>
+                <?php if(session('error')): ?>
                     <div class="container">
                         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mt-3"
                             role="alert" style="font-size:1.1rem;">
                             <i class="bi bi-x-circle-fill me-2"></i>
-                            <div>{{ session('error') }}</div>
+                            <div><?php echo e(session('error')); ?></div>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
                                 aria-label="Close"></button>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @auth
+                <?php if(auth()->guard()->check()): ?>
                     <div id="admin-controls" class="mb-4">
                         <button onclick="openModal('add')" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add
                             Portfolio</button>
                     </div>
-                @endauth
+                <?php endif; ?>
 
                 <div class="container">
 
@@ -499,43 +499,43 @@
                         </ul><!-- End Portfolio Filters -->
 
                         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-                            @foreach ($items as $item)
+                            <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div
-                                    class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $item->category }}">
+                                    class="col-lg-4 col-md-6 portfolio-item isotope-item filter-<?php echo e($item->category); ?>">
                                     <div class="portfolio-content h-100">
-                                        <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid"
+                                        <img src="<?php echo e(asset('storage/' . $item->image)); ?>" class="img-fluid"
                                             alt="">
                                         <div class="portfolio-info d-flex flex-column justify-content-between">
                                             <div>
-                                                <h4>{{ $item->title }}</h4>
-                                                <p>{{ $item->description }}</p>
+                                                <h4><?php echo e($item->title); ?></h4>
+                                                <p><?php echo e($item->description); ?></p>
                                             </div>
                                             <div class="d-flex align-items-center gap-2 mt-2">
-                                                <a href="{{ asset('storage/' . $item->image) }}" title="App 1"
+                                                <a href="<?php echo e(asset('storage/' . $item->image)); ?>" title="App 1"
                                                     data-gallery="portfolio-gallery-app"
                                                     class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                                @auth
+                                                <?php if(auth()->guard()->check()): ?>
                                                     <button type="button" class="btn btn-warning btn-sm" title="Edit"
-                                                        onclick="editItem({{ $item->id }}, '{{ $item->title }}', '{{ $item->description }}', '{{ $item->image }}', '{{ $item->category }}')">
+                                                        onclick="editItem(<?php echo e($item->id); ?>, '<?php echo e($item->title); ?>', '<?php echo e($item->description); ?>', '<?php echo e($item->image); ?>', '<?php echo e($item->category); ?>')">
                                                         <i class="bi bi-pencil-square"></i> Edit
                                                     </button>
-                                                    <form action="{{ route('item.destroy', ['item' => $item->id]) }}"
+                                                    <form action="<?php echo e(route('item.destroy', ['item' => $item->id])); ?>"
                                                         method="POST" class="d-inline delete-form"
-                                                        id="delete-form-{{ $item->id }}">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                        id="delete-form-<?php echo e($item->id); ?>">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
                                                         <button type="button" class="btn btn-danger btn-sm"
                                                             title="Delete"
-                                                            onclick="showDeleteModal({{ $item->id }}, '{{ $item->title }}')">
+                                                            onclick="showDeleteModal(<?php echo e($item->id); ?>, '<?php echo e($item->title); ?>')">
                                                             <i class="bi bi-trash"></i> Delete
                                                         </button>
                                                     </form>
-                                                @endauth
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- End Portfolio Item -->
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -548,7 +548,7 @@
 
             </section><!-- /Portfolio Section -->
 
-            @auth
+            <?php if(auth()->guard()->check()): ?>
                 <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-title"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -558,9 +558,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                     onclick="closeModal()"></button>
                             </div>
-                            <form id="portfolio-form" action="{{ route('item.store') }}" method="POST"
+                            <form id="portfolio-form" action="<?php echo e(route('item.store')); ?>" method="POST"
                                 enctype="multipart/form-data">
-                                @csrf
+                                <?php echo csrf_field(); ?>
                                 <div class="modal-body">
                                     <input type="hidden" name="id" id="item-id">
                                     <div class="mb-3">
@@ -598,11 +598,11 @@
                         </div>
                     </div>
                 </div>
-            @endauth
+            <?php endif; ?>
 
 
             <!-- Modal Konfirmasi Delete -->
-            @auth
+            <?php if(auth()->guard()->check()): ?>
                 <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -625,7 +625,7 @@
                         </div>
                     </div>
                 </div>
-            @endauth
+            <?php endif; ?>
 
             <section id="services" class="services section">
 
@@ -752,17 +752,17 @@
                                 <div class="testimonial-item">
                                     <p>
                                         <i class="bi bi-quote quote-icon-left"></i>
-                                        <span>{{ $profile['bio'] ?? '-' }}</span>
+                                        <span><?php echo e($profile['bio'] ?? '-'); ?></span>
                                         <i class="bi bi-quote quote-icon-right"></i>
                                     </p>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'"><img
                                             src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
                                             alt=""></a>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'">
-                                        <h3>{{ $profile['name'] ?? '-' }}</h3>
+                                        <h3><?php echo e($profile['name'] ?? '-'); ?></h3>
                                     </a>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'">
-                                        <h4">{{ $profile['degree'] ?? '-' }}</h4>
+                                        <h4"><?php echo e($profile['degree'] ?? '-'); ?></h4>
                                     </a>
                                 </div>
                             </div><!-- End testimonial item -->
@@ -779,40 +779,40 @@
                         <span class="modal-close" onclick="closeProfileModal()">&times;</span>
 
                         <div class="modal-header">
-                            <img src="{{ $profile['pic'] ?? 'assets/img/profile.jpeg' }}" class="profile-img-modal"
+                            <img src="<?php echo e($profile['pic'] ?? 'assets/img/profile.jpeg'); ?>" class="profile-img-modal"
                                 alt="Foto Profil">
                             <div class="modal-title">
-                                <h2>{{ $profile['name'] ?? '-' }}</h2>
-                                <p class="bio-text">{{ $profile['bio'] ?? '-' }}</p>
+                                <h2><?php echo e($profile['name'] ?? '-'); ?></h2>
+                                <p class="bio-text"><?php echo e($profile['bio'] ?? '-'); ?></p>
                             </div>
                         </div>
 
                         <div class="modal-body">
                             <div class="info-grid">
-                                <p><strong>Birthday:</strong> {{ $profile['birth_date'] ?? '-' }}</p>
-                                <p><strong>Age:</strong> {{ $profile['age'] ?? '-' }}</p>
-                                <p><strong>Website:</strong> {{ $profile['website'] ?? '-' }}</p>
-                                <p><strong>Phone:</strong> {{ $profile['phone'] ?? '-' }}</p>
-                                <p><strong>Email:</strong> {{ $profile['email'] ?? '-' }}</p>
-                                <p><strong>City:</strong> {{ $profile['address'] ?? '-' }}</p>
-                                <p><strong>Degree:</strong> {{ $profile['degree'] ?? '-' }}</p>
-                                <p><strong>Freelance:</strong> {{ $profile['freelance'] ?? '-' }}</p>
+                                <p><strong>Birthday:</strong> <?php echo e($profile['birth_date'] ?? '-'); ?></p>
+                                <p><strong>Age:</strong> <?php echo e($profile['age'] ?? '-'); ?></p>
+                                <p><strong>Website:</strong> <?php echo e($profile['website'] ?? '-'); ?></p>
+                                <p><strong>Phone:</strong> <?php echo e($profile['phone'] ?? '-'); ?></p>
+                                <p><strong>Email:</strong> <?php echo e($profile['email'] ?? '-'); ?></p>
+                                <p><strong>City:</strong> <?php echo e($profile['address'] ?? '-'); ?></p>
+                                <p><strong>Degree:</strong> <?php echo e($profile['degree'] ?? '-'); ?></p>
+                                <p><strong>Freelance:</strong> <?php echo e($profile['freelance'] ?? '-'); ?></p>
                             </div>
 
                             <h3>Portfolio Teman</h3>
                             <div class="portfolio-list">
-                                @forelse ($friendPortfolios as $item)
+                                <?php $__empty_1 = true; $__currentLoopData = $friendPortfolios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <div class="portfolio-card">
-                                        <img src="{{ $item['image'] ?? '' }}" alt="Image">
+                                        <img src="<?php echo e($item['image'] ?? ''); ?>" alt="Image">
                                         <div class="portfolio-info">
-                                            <h4>{{ $item['title'] ?? '-' }}</h4>
-                                            <p>{{ $item['description'] ?? '-' }}</p>
-                                            <span class="badge">{{ $item['category'] ?? '-' }}</span>
+                                            <h4><?php echo e($item['title'] ?? '-'); ?></h4>
+                                            <p><?php echo e($item['description'] ?? '-'); ?></p>
+                                            <span class="badge"><?php echo e($item['category'] ?? '-'); ?></span>
                                         </div>
                                     </div>
-                                @empty
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <p class="text-muted">Belum ada portofolio dari teman.</p>
-                                @endforelse
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -953,7 +953,7 @@
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
 
     <script>
         function openProfileModal() {
@@ -985,7 +985,7 @@
                 }
                 if (mode === 'add') {
                     document.getElementById('modal-title').innerText = 'Add Portfolio';
-                    form.action = "{{ route('item.store') }}";
+                    form.action = "<?php echo e(route('item.store')); ?>";
                     form.method = "POST";
                     document.getElementById('item-id').value = '';
                     document.getElementById('item-title').value = '';
@@ -1093,3 +1093,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\Users\devam\Documents\GitHub\Portfolio_laravel\resources\views/layout/app.blade.php ENDPATH**/ ?>
