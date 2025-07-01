@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Portofolio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
-use App\Models\Profile;
 
 class portofolioController extends Controller
 {
     public function index()
     {
         $items = Portofolio::all();
+
+        // Ambil data biodata
         $biodata = \App\Models\Profile::first();
 
         // Ambil data API teman
@@ -33,7 +34,7 @@ class portofolioController extends Controller
             'items' => $items,
             'profile' => $profile,
             'friendPortfolios' => $friendPortfolios,
-            'biodata' => $biodata
+            'biodata' => $biodata // tambahkan ini
         ]);
     }
     public function store(Request $request)
@@ -74,55 +75,4 @@ public function update(Request $request, $id)
     return redirect()->route('home')->with('success', 'Portfolio berhasil diupdate!');
 }
 
-public function biodataStore(Request $request)
-{
-    $data = $request->validate([
-        'bio' => 'required|string',
-            'name' => 'required|string|max:255',
-            'birth_date' => 'required|date',
-            'age' => 'required|integer|min:0',
-            'website' => 'nullable|string|max:255',
-            'degree' => 'nullable|string|max:100',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'address' => 'nullable|string|max:255',
-            'freelance' => 'nullable|string|max:50',
-            'pic' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-    ]); // isi sesuai $fillable
-    $data['pic'] = $request->file('pic')->store('biodata', 'public');
-    Profile::create($data);
-    return redirect()->back();
-}
-
-public function biodataUpdate(Request $request, $id)
-{
-    $biodata = Profile::findOrFail($id);
-    $data = $request->validate([
-        'bio' => 'required|string',
-            'name' => 'required|string|max:255',
-            'birth_date' => 'required|date',
-            'age' => 'required|integer|min:0',
-            'website' => 'nullable|string|max:255',
-            'degree' => 'nullable|string|max:100',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'address' => 'nullable|string|max:255',
-            'freelance' => 'nullable|string|max:50',
-            'pic' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-    ]);
-    if ($request->hasFile('pic')) {
-        Storage::delete('public/' . $biodata->pic);
-        $data['pic'] = $request->file('pic')->store('biodata', 'public');
-    }
-    $biodata->update($data);
-    return redirect()->back();
-}
-
-public function biodataDestroy($id)
-{
-    $biodata = Profile::findOrFail($id);
-    Storage::delete('public/' . $biodata->pic);
-    $biodata->delete();
-    return redirect()->back();
-}
 }

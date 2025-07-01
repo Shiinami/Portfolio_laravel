@@ -127,12 +127,12 @@
 
                 <div class="row gy-4 justify-content-center">
                     <div class="col-lg-4">
-                        <img src="{{ $biodata->pic ?? 'assets/img/profile.jpeg'  }}" class="img-fluid" alt="">
+                        <img src="{{ $biodata && $biodata->pic ? asset('storage/' . $biodata->pic) : asset('assets/img/profile.jpeg') }}" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-8 content">
                         <h2>UI/UX Designer &amp; Graphic Designer.</h2>
                         <p class="fst-italic py-3">
-                            {{ $biodata->bio }} I'am a college student from Institut Teknologi dan Kesehatan Rumah Sakit dr. Soepraoen. I'am
+                            {{ $biodata->bio ?? '' }} I'am a college student from Institut Teknologi dan Kesehatan Rumah Sakit dr. Soepraoen. I'am
                             a UI/UX Designer and Graphic Designer. I love to design something that can be useful for
                             people. I <del>don't</del> have experience in creating UI/UX design, graphic design, and
                             video editing.
@@ -140,25 +140,35 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>{{ $biodata->birth_date }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{{ $biodata->website }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>{{ $biodata->phone }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{ $biodata->address }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>{{ $biodata->birth_date ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{{ $biodata->website ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>{{ $biodata->phone ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{ $biodata->address ?? '' }}</span></li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{{ $biodata->age }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ $biodata->degree }}</span>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{{ $biodata->age ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ $biodata->degree ?? '' }}</span>
                                     </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
-                                        <span>{{ $biodata->email }}</span>
+                                        <span>{{ $biodata->email ?? '' }}</span>
                                     </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong>
-                                        <span>{{ $biodata->freelance }}</span>
+                                        <span>{{ $biodata->freelance ?? '' }}</span>
                                     </li>
                                 </ul>
                             </div>
+                            <div class="signature mt-4">
+                <div class="signature-image">
+                  <img src="{{ asset('assets/img/signature.png') }}" alt="Signature" class="img-fluid">
+                </div>
+                <div class="signature-info">
+                  <h4>{{ $biodata->name ?? '' }}</h4>
+                  <p>Student, Indonesia</p>
+                </div>
+              </div>
+
                         </div>
                         <p class="py-3">
                             “We're all like fireworks: we climb, we shine and always go our separate ways and become

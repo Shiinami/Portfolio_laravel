@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\portofolioController;
+use App\Http\Controllers\BiodataController;
 
 
 Route::get('/', [portofolioController::class, 'index'])->name('home');
@@ -24,10 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [portofolioController::class, 'index'])->middleware('verified')->name('dashboard');
 
     // Biodata
-    Route::post('/biodata', [portofolioController::class, 'biodataStore'])->name('biodata.store');
-    Route::patch('/biodata/{id}', [portofolioController::class, 'biodataUpdate'])->name('biodata.update');
-    Route::put('/biodata/{id}', [portofolioController::class, 'biodataUpdate']); // Tambahkan baris ini
-    Route::delete('/biodata/{id}', [portofolioController::class, 'biodataDestroy'])->name('biodata.destroy');
+    Route::post('/biodata', [BiodataController::class, 'store'])->name('biodata.store');
+    Route::patch('/biodata/{id}', [BiodataController::class, 'update'])->name('biodata.update');
+    Route::put('/biodata/{id}', [BiodataController::class, 'update']);
+    Route::delete('/biodata/{id}', [BiodataController::class, 'destroy'])->name('biodata.destroy');
 
 });
 
