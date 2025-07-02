@@ -1,83 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Home | Deva Syaiful</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="assets/img/borgar.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <!-- Main CSS File -->
-    <link href="<?php echo e(asset('assets/css/main.css')); ?>" rel="stylesheet">
-
-</head>
-
-<body class="index-page">
-
-    <header id="header" class="header dark-background d-flex flex-column">
-        <i class="header-toggle d-xl-none bi bi-list"></i>
-
-        <div class="profile-img position-relative">
-            <img src="assets/img/profile.jpeg" alt="" class="img-fluid rounded-circle">
-            <?php if(Auth::check()): ?>
-                <form action="<?php echo e(route('logout')); ?>" method="POST"
-                    style="position: absolute; top: 10px; left: 10px; z-index: 10;">
-                    <?php echo csrf_field(); ?>
-                    <button type="submit" class="btn btn-danger btn-sm"></button>
-                </form>
-            <?php else: ?>
-                <a href="<?php echo e(url('/login')); ?>" id="login-btn" class="btn btn-primary btn-sm position-absolute"
-                    style="top: 10px; left: 10px; z-index: 10;"></a>
-            <?php endif; ?>
-        </div>
-
-        <a href="<?php echo e(route('home')); ?>" class="logo d-flex align-items-center justify-content-center">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <img src="assets/img/borgar.png" alt="">
-            <h1 class="sitename">Deva Muhamad S.A</h1>
-        </a>
-
-        <div class="social-links text-center">
-            <a href="https://x.com/MrBoyMan4" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.instagram.com/mr.boyman28/" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://github.com/Shiinami" class="github"><i class="bi bi-github"></i></a>
-            <a href="https://www.linkedin.com/in/deva-muhamad-30a9a7340/" class="linkedin"><i
-                    class="bi bi-linkedin"></i></a>
-        </div>
-
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-                <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-                <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
-                <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
-                <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
-                <li><a href="#testimonials"><i class="bi bi-chat-left-text navicon"></i> My Friends</a></li>
-                <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
-            </ul>
-        </nav>
-
-    </header>
-
+<?php $__env->startSection('content'); ?>
     <main class="main">
 
         <!-- Hero Section -->
@@ -87,8 +8,7 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <h2>Deva Muhamad Syaiful Arifin</h2>
-                <p>I'm <span class="typed"
-                        data-typed-items="Graphic Designer, UI/UX Designer, Photographer"></span><span
+                <p>I'm <span class="typed" data-typed-items="Graphic Designer, UI/UX Designer, Photographer"></span><span
                         class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span
                         class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
             </div>
@@ -107,15 +27,12 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <?php if(auth()->guard()->check()): ?>
-
                     <div class="biodata-controls" style="margin-bottom: 20px;">
                         <?php if(!$biodata): ?>
-                            <button class="open-profile-btn" onclick="openBiodataModal('add')">Tambah Biodata</button>
+                            <button class="open-profile-btn" onclick="openAddBiodataModal()">Tambah Biodata</button>
                         <?php else: ?>
-                            <button class="open-profile-btn" onclick="openBiodataModal('edit')">Edit Biodata</button>
-
-                            <form method="POST" action="<?php echo e(route('biodata.destroy', $biodata->id)); ?>"
-                                style="display:inline;">
+                            <button class="open-profile-btn" onclick="openEditBiodataModal()">Edit Biodata</button>
+                            <form method="POST" action="<?php echo e(route('biodata.destroy', $biodata->id)); ?>" style="display:inline;">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('DELETE'); ?>
                                 <button type="submit" class="open-profile-btn" style="background-color: #b02a37;">
@@ -134,29 +51,31 @@
                     <div class="col-lg-8 content">
                         <h2>UI/UX Designer &amp; Graphic Designer.</h2>
                         <p class="fst-italic py-3">
-                            <?php echo e($biodata->bio ?? ''); ?> I'am a college student from Institut Teknologi dan Kesehatan Rumah
-                            Sakit dr. Soepraoen. I'am
-                            a UI/UX Designer and Graphic Designer. I love to design something that can be useful for
-                            people. I <del>don't</del> have experience in creating UI/UX design, graphic design, and
-                            video editing.
+                            <?php echo e($biodata->bio ?? ''); ?>
+
                         </p>
                         <div class="row">
                             <div class="col-lg-6">
                                 <ul>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong>
-                                        <span><?php echo e($biodata->birth_date ?? ''); ?></span></li>
+                                        <span><?php echo e($biodata->birth_date ?? ''); ?></span>
+                                    </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong>
-                                        <span><?php echo e($biodata->website ?? ''); ?></span></li>
+                                        <span><?php echo e($biodata->website ?? ''); ?></span>
+                                    </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong>
-                                        <span><?php echo e($biodata->phone ?? ''); ?></span></li>
+                                        <span><?php echo e($biodata->phone ?? ''); ?></span>
+                                    </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>City:</strong>
-                                        <span><?php echo e($biodata->address ?? ''); ?></span></li>
+                                        <span><?php echo e($biodata->address ?? ''); ?></span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
                                 <ul>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong>
-                                        <span><?php echo e($biodata->age ?? ''); ?></span></li>
+                                        <span><?php echo e($biodata->age ?? ''); ?></span>
+                                    </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong>
                                         <span><?php echo e($biodata->degree ?? ''); ?></span>
                                     </li>
@@ -170,8 +89,7 @@
                             </div>
                             <div class="signature mt-4">
                                 <div class="signature-image">
-                                    <img src="<?php echo e(asset('assets/img/signature.png')); ?>" alt="Signature"
-                                        class="img-fluid">
+                                    <img src="<?php echo e(asset('assets/img/signature.png')); ?>" alt="Signature" class="img-fluid">
                                 </div>
                                 <div class="signature-info">
                                     <h4><?php echo e($biodata->name ?? ''); ?></h4>
@@ -192,74 +110,6 @@
             </div>
 
         </section><!-- /About Section -->
-
-        <?php if(auth()->guard()->check()): ?>
-
-            <div id="biodataModal" class="modal-overlay">
-                <div class="modal-box">
-                    <span class="modal-close" onclick="closeBiodataModal()">&times;</span>
-
-                    <h2 id="modalBiodataTitle">Tambah/Edit Biodata</h2>
-
-                    <form id="biodata-form" method="POST"
-                        action="<?php echo e($biodata ? route('biodata.update', $biodata->id) : route('biodata.store')); ?>"
-                        enctype="multipart/form-data">
-                        <?php echo csrf_field(); ?>
-                        <?php if($biodata): ?>
-                            <?php echo method_field('PATCH'); ?> 
-                        <?php endif; ?>
-
-                        <div class="modal-body">
-                            <label>Foto:</label>
-                            <input type="file" name="pic" class="form-input"><br><br>
-
-                            <label>Nama:</label>
-                            <input type="text" name="name" value="<?php echo e(old('name', $biodata->name ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Bio:</label>
-                            <textarea name="bio" rows="3" class="form-input"><?php echo e(old('bio', $biodata->bio ?? '')); ?></textarea>
-
-                            <label>Birth Date:</label>
-                            <input type="date" name="birth_date"
-                                value="<?php echo e(old('birth_date', $biodata->birth_date ?? '')); ?>" class="form-input">
-
-                            <label>Age:</label>
-                            <input type="number" name="age" value="<?php echo e(old('age', $biodata->age ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Website:</label>
-                            <input type="text" name="website" value="<?php echo e(old('website', $biodata->website ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Degree:</label>
-                            <input type="text" name="degree" value="<?php echo e(old('degree', $biodata->degree ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Phone:</label>
-                            <input type="text" name="phone" value="<?php echo e(old('phone', $biodata->phone ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Email:</label>
-                            <input type="email" name="email" value="<?php echo e(old('email', $biodata->email ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Address:</label>
-                            <input type="text" name="address" value="<?php echo e(old('address', $biodata->address ?? '')); ?>"
-                                class="form-input">
-
-                            <label>Freelance:</label>
-                            <input type="text" name="freelance"
-                                value="<?php echo e(old('freelance', $biodata->freelance ?? '')); ?>" class="form-input">
-
-                            <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾
-                                Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        <?php endif; ?>
 
         <!-- Stats Section -->
         <section id="stats" class="stats section">
@@ -532,8 +382,7 @@
 
                         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
                             <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div
-                                    class="col-lg-4 col-md-6 portfolio-item isotope-item filter-<?php echo e($item->category); ?>">
+                                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-<?php echo e($item->category); ?>">
                                     <div class="portfolio-content h-100">
                                         <img src="<?php echo e(asset('storage/' . $item->image)); ?>" class="img-fluid"
                                             alt="">
@@ -544,8 +393,10 @@
                                             </div>
                                             <div class="d-flex align-items-center gap-2 mt-2">
                                                 <a href="<?php echo e(asset('storage/' . $item->image)); ?>" title="App 1"
-                                                    data-gallery="portfolio-gallery-app"
-                                                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
+                                                        class="bi bi-zoom-in"></i></a>
+                                                <a href="<?php echo e(url('/?view=portfolio', $item->id)); ?>" title="More Details"
+                                                    class="details-link"><i class="bi bi-link-45deg"></i></a>
                                                 <?php if(auth()->guard()->check()): ?>
                                                     <button type="button" class="btn btn-warning btn-sm" title="Edit"
                                                         onclick="editItem(<?php echo e($item->id); ?>, '<?php echo e($item->title); ?>', '<?php echo e($item->description); ?>', '<?php echo e($item->image); ?>', '<?php echo e($item->category); ?>')">
@@ -556,8 +407,7 @@
                                                         id="delete-form-<?php echo e($item->id); ?>">
                                                         <?php echo csrf_field(); ?>
                                                         <?php echo method_field('DELETE'); ?>
-                                                        <button type="button" class="btn btn-danger btn-sm"
-                                                            title="Delete"
+                                                        <button type="button" class="btn btn-danger btn-sm" title="Delete"
                                                             onclick="showDeleteModal(<?php echo e($item->id); ?>, '<?php echo e($item->title); ?>')">
                                                             <i class="bi bi-trash"></i> Delete
                                                         </button>
@@ -580,9 +430,9 @@
 
             </section><!-- /Portfolio Section -->
 
+            <!-- Modal Form Portfolio -->
             <?php if(auth()->guard()->check()): ?>
-                <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-title"
-                    aria-hidden="true">
+                <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -597,8 +447,8 @@
                                     <input type="hidden" name="id" id="item-id">
                                     <div class="mb-3">
                                         <label for="item-title" class="form-label">Title</label>
-                                        <input type="text" name="title" placeholder="Title" required
-                                            id="item-title" class="form-control">
+                                        <input type="text" name="title" placeholder="Title" required id="item-title"
+                                            class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label for="item-description" class="form-label">Description</label>
@@ -630,8 +480,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
-
+            <?php endif; ?> <!-- End Modal Form Portfolio -->
 
             <!-- Modal Konfirmasi Delete -->
             <?php if(auth()->guard()->check()): ?>
@@ -657,7 +506,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
+            <?php endif; ?> <!-- End Modal Konfirmasi Delete -->
 
             <section id="services" class="services section">
 
@@ -788,8 +637,8 @@
                                         <i class="bi bi-quote quote-icon-right"></i>
                                     </p>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'"><img
-                                            src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
-                                            alt=""></a>
+                                            src="<?php echo e($profile['pic'] ?? 'assets/img/profile.jpeg'); ?>"
+                                            class="testimonial-img" alt=""></a>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'">
                                         <h3><?php echo e($profile['name'] ?? '-'); ?></h3>
                                     </a>
@@ -904,8 +753,8 @@
                         </div>
 
                         <div class="col-lg-7">
-                            <form action="forms/contact.php" method="post" class="php-email-form"
-                                data-aos="fade-up" data-aos-delay="200">
+                            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+                                data-aos-delay="200">
                                 <div class="row gy-4">
 
                                     <div class="col-md-6">
@@ -951,20 +800,6 @@
 
     </main>
 
-    <footer id="footer" class="footer position-relative light-background">
-
-        <div class="container">
-            <div class="copyright text-center ">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">iPortfolio</strong> <span>All Rights
-                        Reserved</span></p>
-            </div>
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
-
-    </footer>
-
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
@@ -983,6 +818,102 @@
     <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    
+
+    <?php if(auth()->guard()->check()): ?>
+        <?php if(!$biodata): ?>
+            <div id="addBiodataModal" class="modal-overlay">
+                <div class="modal-box">
+                    <span class="modal-close" onclick="closeAddBiodataModal()">&times;</span>
+                    <h2>Tambah Biodata</h2>
+                    <form id="add-biodata-form" method="POST" action="<?php echo e(route('biodata.store')); ?>"
+                        enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <div class="modal-body">
+                            <label>Foto:</label>
+                            <input type="file" name="pic" class="form-input"><br><br>
+                            <label>Nama:</label>
+                            <input type="text" name="name" value="<?php echo e(old('name')); ?>" class="form-input">
+                            <label>Bio:</label>
+                            <textarea name="bio" rows="3" class="form-input"><?php echo e(old('bio')); ?></textarea>
+                            <label>Birth Date:</label>
+                            <input type="date" name="birth_date" value="<?php echo e(old('birth_date')); ?>" class="form-input">
+                            <label>Age:</label>
+                            <input type="number" name="age" value="<?php echo e(old('age')); ?>" class="form-input">
+                            <label>Website:</label>
+                            <input type="text" name="website" value="<?php echo e(old('website')); ?>" class="form-input">
+                            <label>Degree:</label>
+                            <input type="text" name="degree" value="<?php echo e(old('degree')); ?>" class="form-input">
+                            <label>Phone:</label>
+                            <input type="text" name="phone" value="<?php echo e(old('phone')); ?>" class="form-input">
+                            <label>Email:</label>
+                            <input type="email" name="email" value="<?php echo e(old('email')); ?>" class="form-input">
+                            <label>Address:</label>
+                            <input type="text" name="address" value="<?php echo e(old('address')); ?>" class="form-input">
+                            <label>Freelance:</label>
+                            <input type="text" name="freelance" value="<?php echo e(old('freelance')); ?>" class="form-input">
+                            <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">➕
+                                Tambah</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if(auth()->guard()->check()): ?>
+        <?php if($biodata): ?>
+            <div id="editBiodataModal" class="modal-overlay">
+                <div class="modal-box">
+                    <span class="modal-close" onclick="closeEditBiodataModal()">&times;</span>
+                    <h2>Edit Biodata</h2>
+                    <form id="edit-biodata-form" method="POST" action="<?php echo e(route('biodata.update', $biodata->id)); ?>"
+                        enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PATCH'); ?>
+                        <div class="modal-body">
+                            <label>Foto:</label>
+                            <input type="file" name="pic" class="form-input"><br><br>
+                            <label>Nama:</label>
+                            <input type="text" name="name" value="<?php echo e(old('name', $biodata->name)); ?>"
+                                class="form-input">
+                            <label>Bio:</label>
+                            <textarea name="bio" rows="3" class="form-input"><?php echo e(old('bio', $biodata->bio)); ?></textarea>
+                            <label>Birth Date:</label>
+                            <input type="date" name="birth_date" value="<?php echo e(old('birth_date', $biodata->birth_date)); ?>"
+                                class="form-input">
+                            <label>Age:</label>
+                            <input type="number" name="age" value="<?php echo e(old('age', $biodata->age)); ?>"
+                                class="form-input">
+                            <label>Website:</label>
+                            <input type="text" name="website" value="<?php echo e(old('website', $biodata->website)); ?>"
+                                class="form-input">
+                            <label>Degree:</label>
+                            <input type="text" name="degree" value="<?php echo e(old('degree', $biodata->degree)); ?>"
+                                class="form-input">
+                            <label>Phone:</label>
+                            <input type="text" name="phone" value="<?php echo e(old('phone', $biodata->phone)); ?>"
+                                class="form-input">
+                            <label>Email:</label>
+                            <input type="email" name="email" value="<?php echo e(old('email', $biodata->email)); ?>"
+                                class="form-input">
+                            <label>Address:</label>
+                            <input type="text" name="address" value="<?php echo e(old('address', $biodata->address)); ?>"
+                                class="form-input">
+                            <label>Freelance:</label>
+                            <input type="text" name="freelance" value="<?php echo e(old('freelance', $biodata->freelance)); ?>"
+                                class="form-input">
+                            <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾
+                                Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
 
     <!-- Main JS File -->
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
@@ -1107,22 +1038,31 @@
     </script>
 
     <script>
-        function openBiodataModal(mode) {
-            document.getElementById('biodataModal').style.display = 'block';
-            document.getElementById('modalBiodataTitle').innerText = mode === 'edit' ? 'Edit Biodata' : 'Tambah Biodata';
+        function openAddBiodataModal() {
+            document.getElementById("addBiodataModal").style.display = "block";
         }
 
-        function closeBiodataModal() {
-            document.getElementById('biodataModal').style.display = 'none';
+        function closeAddBiodataModal() {
+            document.getElementById("addBiodataModal").style.display = "none";
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('biodataModal');
-            if (e.target === modal) modal.style.display = 'none';
+        function openEditBiodataModal() {
+            document.getElementById("editBiodataModal").style.display = "block";
         }
+
+        function closeEditBiodataModal() {
+            document.getElementById("editBiodataModal").style.display = "none";
+        }
+        // Hanya close modal jika klik di luar modal
+        window.addEventListener('click', function(e) {
+            var addModal = document.getElementById('addBiodataModal');
+            var editModal = document.getElementById('editBiodataModal');
+            if (addModal && e.target === addModal) addModal.style.display = 'none';
+            if (editModal && e.target === editModal) editModal.style.display = 'none';
+        });
     </script>
 
-</body>
+    </body>
+<?php $__env->stopSection(); ?>
 
-</html>
-<?php /**PATH C:\Users\devam\Documents\GitHub\Portfolio_laravel\resources\views/layout/app.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\devam\Documents\GitHub\Portfolio_laravel\resources\views/layout/app.blade.php ENDPATH**/ ?>

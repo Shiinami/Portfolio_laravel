@@ -23,14 +23,18 @@ class BiodataController extends Controller
             'freelance' => 'nullable|string|max:50',
             'pic' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
-        $data['pic'] = $request->file('pic')->store('biodata', 'public');
+        if ($request->hasFile('pic')) {
+            $data['pic'] = $request->file('pic')->store('biodata', 'public');
+        } else {
+            unset($data['pic']);
+        }
         Profile::create($data);
-        return redirect()->back();
+        return redirect()->route('home')->with('berhasil', 'Biodata berhasil ditambahkan!');
     }
 
     public function update(Request $request, $id)
     {
-        $biodata = Profile::findOrFail($id);
+        $biodata = \App\Models\Profile::findOrFail($id);
         $data = $request->validate([
             'bio' => 'required|string',
             'name' => 'required|string|max:255',
@@ -45,11 +49,15 @@ class BiodataController extends Controller
             'pic' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
         if ($request->hasFile('pic')) {
-            Storage::delete('public/' . $biodata->pic);
+            if ($biodata->pic) {
+                \Illuminate\Support\Facades\Storage::delete('public/' . $biodata->pic);
+            }
             $data['pic'] = $request->file('pic')->store('biodata', 'public');
+        } else {
+            unset($data['pic']);
         }
         $biodata->update($data);
-        return redirect()->back();
+        return redirect()->route('home')->with('berhasil', 'Biodata berhasil diupdate!');
     }
 
     public function destroy($id)

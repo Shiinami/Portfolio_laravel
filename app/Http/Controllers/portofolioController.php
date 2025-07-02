@@ -30,49 +30,50 @@ class portofolioController extends Controller
             // Jika gagal ambil API, biarkan profile dan friendPortfolios null/empty
         }
 
-        return view('layout.app', [
+        $viewName = request('view') === 'portfolio' ? 'content.portfolio' : 'layout.app';
+
+        return view($viewName, [
             'items' => $items,
             'profile' => $profile,
             'friendPortfolios' => $friendPortfolios,
-            'biodata' => $biodata // tambahkan ini
+            'biodata' => $biodata
         ]);
     }
     public function store(Request $request)
-{
-    $data = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'image' => 'required|image|mimes:jpg,png,jpeg,webp,svg|max:2048',
-        'category' => 'required|string',
-    ]);
+    {
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp,svg|max:2048',
+            'category' => 'required|string',
+        ]);
 
-    $data['image'] = $request->file('image')->store('portfolio', 'public');
-    Portofolio::create($data);
+        $data['image'] = $request->file('image')->store('portfolio', 'public');
+        Portofolio::create($data);
 
-    return redirect()->back();
-}
+        return redirect()->back();
+    }
 
-public function destroy($id)
-{
-    $item = Portofolio::findOrFail($id);
-    Storage::disk('public')->delete($item->image);
-    $item->delete();
+    public function destroy($id)
+    {
+        $item = Portofolio::findOrFail($id);
+        Storage::disk('public')->delete($item->image);
+        $item->delete();
 
-    return redirect()->back();
-}
+        return redirect()->back();
+    }
 
-public function update(Request $request, $id)
-{
-    $data = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'category' => 'required|string',
-        'image' => 'nullable|image|max:2048',
-    ]);
-    $item = Portofolio::findOrFail($id);
-    $item->update($data);
-    // handle image jika ada
-    return redirect()->route('home')->with('success', 'Portfolio berhasil diupdate!');
-}
-
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
+        $item = Portofolio::findOrFail($id);
+        $item->update($data);
+        // handle image jika ada
+        return redirect()->route('home')->with('success', 'Portfolio berhasil diupdate!');
+    }
 }

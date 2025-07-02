@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/biodata/{id}', [BiodataController::class, 'destroy'])->name('biodata.destroy');
 
 });
+Route::get('/{view?}', [portofolioController::class, 'index'])->name('view')->where('view', 'portfolio|home');
 
 
 
