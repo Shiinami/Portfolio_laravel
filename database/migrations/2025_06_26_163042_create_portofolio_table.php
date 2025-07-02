@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('image');
             $table->string('category');
+            $table->string('project_date')->nullable();
+            $table->string('link')->nullable();
+            $table->string('client')->nullable();
             $table->timestamps();
         });
     }

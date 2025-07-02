@@ -1,6 +1,4 @@
-@extends('layout.sidebar')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section id="portfolio-details" class="portfolio-details section">
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -75,4 +73,6 @@
         </div>
 
     </section><!-- /Portfolio Details Section -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\devam\Documents\GitHub\Portfolio_laravel\resources\views/content/portfolio.blade.php ENDPATH**/ ?>

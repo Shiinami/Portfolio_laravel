@@ -12,5 +12,8 @@ class Portofolio extends Model
         'description',
         'image',
         'category',
+        'project_date',
+        'link',
+        'client',
     ];
 }

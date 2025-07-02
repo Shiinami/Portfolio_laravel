@@ -331,9 +331,8 @@
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Portfolio</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p>Here is some of my work and certificates that I have. Mostly it's just a design and it's not publised
+                        yet.</p>
                 </div><!-- End Section Title -->
 
                 <!-- Notifikasi Sukses/Hapus -->
@@ -395,8 +394,9 @@
                                                 <a href="<?php echo e(asset('storage/' . $item->image)); ?>" title="App 1"
                                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
                                                         class="bi bi-zoom-in"></i></a>
-                                                <a href="<?php echo e(url('/?view=portfolio', $item->id)); ?>" title="More Details"
-                                                    class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                                <a href="<?php echo e(url('/?view=portfolio&item=' . $item->id)); ?>"
+                                                    title="More Details" class="details-link"><i
+                                                        class="bi bi-link-45deg"></i></a>
                                                 <?php if(auth()->guard()->check()): ?>
                                                     <button type="button" class="btn btn-warning btn-sm" title="Edit"
                                                         onclick="editItem(<?php echo e($item->id); ?>, '<?php echo e($item->title); ?>', '<?php echo e($item->description); ?>', '<?php echo e($item->image); ?>', '<?php echo e($item->category); ?>')">
@@ -458,6 +458,21 @@
                                     <div class="mb-3">
                                         <label for="item-image" class="form-label">Image</label>
                                         <input type="file" name="image" placeholder="Image" id="item-image"
+                                            class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="item-link" class="form-label">Link</label>
+                                        <input type="text" name="link" placeholder="Link" id="item-link"
+                                            class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="item-client" class="form-label">Client</label>
+                                        <input type="text" name="client" placeholder="Client" id="item-client"
+                                            class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="item-date" class="form-label">Date</label>
+                                        <input type="date" name="date" placeholder="Date" id="item-date"
                                             class="form-control">
                                     </div>
                                     <div class="mb-3">
