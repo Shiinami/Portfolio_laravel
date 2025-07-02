@@ -13,14 +13,14 @@ class DatabaseSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'user@example.com'],
             [
-                'name' => 'Deva Syaiful',
+                'name' => 'Nabila Camelia',
                 'password' => bcrypt('password') // ganti jika perlu
             ]
         );
 
-        $this->call([
-            ProfileSeeder::class,
-            PortfolioSeeder::class,
-        ]);
+        // $this->call([
+           // ProfileSeeder::class,
+           // PortfolioSeeder::class,
+        // ]);
     }
 }

@@ -9,7 +9,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/borgar.png" rel="icon">
+    <link href="assets/img/itsk.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
@@ -37,7 +37,7 @@
         <i class="header-toggle d-xl-none bi bi-list"></i>
 
         <div class="profile-img position-relative">
-            <img src="assets/img/profile.jpeg" alt="" class="img-fluid rounded-circle">
+            <img src="assets/img/amelhima.png" alt="" class="img-fluid rounded-circle">
             @if (Auth::check())
                 <form action="{{ route('logout') }}" method="POST"
                     style="position: absolute; top: 10px; left: 10px; z-index: 10;">
@@ -52,30 +52,31 @@
 
         <a href="{{ route('home') }}" class="logo d-flex align-items-center justify-content-center">
             <!-- Uncomment the line below if you also wish to use an image logo -->
-            <img src="assets/img/borgar.png" alt="">
+
             <h1 class="sitename">Nabila Camelia</h1>
         </a>
 
         <div class="social-links text-center">
-            <a href="https://x.com/MrBoyMan4" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.instagram.com/mr.boyman28/" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://github.com/Shiinami" class="github"><i class="bi bi-github"></i></a>
-            <a href="https://www.linkedin.com/in/deva-muhamad-30a9a7340/" class="linkedin"><i
-                    class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/nabilbilamel?igsh=MXN0cmtpOWNwanV1cw==" class="instagram"><i
+                    class="bi bi-instagram"></i></a>
+            <a href="https://github.com/nabilacamelia" class="github"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/nabila-camelia-a83925331?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </i></a>
         </div>
 
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
                 <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-                <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+                <li><a href="#skills"><i class="bi bi-person navicon"></i> Skill</a></li>
+                <li><a href="#Experience"><i class="bi bi-file-earmark-text navicon"></i> Experience</a></li>
                 <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
                 <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
                 <li><a href="#testimonials"><i class="bi bi-chat-left-text navicon"></i> My Friends</a></li>
                 <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
             </ul>
         </nav>
-
     </header>
 
     <main class="main">
@@ -83,14 +84,11 @@
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
-            <img src="assets/img/hero.jpeg" alt="" data-aos="fade-in" class="">
+            <img src="assets/img/amelbali.jpg" alt="" data-aos="fade-in" class="">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-                <h2>Nabila Camelia</h2>
-                <p>I'm <span class="typed"
-                        data-typed-items="Graphic Designer, UI/UX Designer, Photographer"></span><span
-                        class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span
-                        class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+              <h2>Nabila Camelia</h2>
+
             </div>
 
         </section><!-- /Hero Section -->
@@ -101,55 +99,59 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>About</h2>
-                <p>I don't know what to write here, but I'll try to make it sound good. So, i love to design something
-                    like designing a UI or designing a logo. The example of that is the logo of this website.</p>
+                <p>Sebagai bentuk perkenalan lebih lanjut, berikut adalah informasi singkat mengenai diri saya:.</p>
             </div><!-- End Section Title -->
+            
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 @auth
 
-                <div class="biodata-controls" style="margin-bottom: 20px;">
-    @if (!$biodata)
-        <button class="open-profile-btn" onclick="openBiodataModal('add')">Tambah Biodata</button>
-    @else
-        <button class="open-profile-btn" onclick="openBiodataModal('edit')">Edit Biodata</button>
+                    <div class="biodata-controls" style="margin-bottom: 20px;">
+                        @if (!$biodata)
+                            <button class="open-profile-btn" onclick="openBiodataModal('add')">Tambah Biodata</button>
+                        @else
+                            <button class="open-profile-btn" onclick="openBiodataModal('edit')">Edit Biodata</button>
 
-        <form method="POST" action="{{ route('biodata.destroy', $biodata->id) }}" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="open-profile-btn" style="background-color: #b02a37;">
-                Hapus Biodata
-            </button>
-        </form>
-    @endif
-</div>
-                    @endauth
+                            <form method="POST" action="{{ route('biodata.destroy', $biodata->id) }}"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="open-profile-btn" style="background-color: #b02a37;">
+                                    Hapus Biodata
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                @endauth
 
                 <div class="row gy-4 justify-content-center">
                     <div class="col-lg-4">
-                        <img src="{{ $biodata && $biodata->pic ? asset('storage/' . $biodata->pic) : asset('assets/img/profile.jpeg') }}" class="img-fluid" alt="">
+                        <img src="{{ $biodata && $biodata->pic ? asset('storage/' . $biodata->pic) : asset('assets/img/profile.jpeg') }}"
+                            class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-8 content">
-                        <h2>UI/UX Designer &amp; Graphic Designer.</h2>
-                        <p class="fst-italic py-3">
-                            {{ $biodata->bio ?? '' }} I'am a college student from Institut Teknologi dan Kesehatan Rumah Sakit dr. Soepraoen. I'am
-                            a UI/UX Designer and Graphic Designer. I love to design something that can be useful for
-                            people. I <del>don't</del> have experience in creating UI/UX design, graphic design, and
-                            video editing.
-                        </p>
+                        <h2>NABILA CAMELIA</h2>
+                        <p class="py-3">
+                            {{ $biodata->bio ?? '' }}</p>
                         <div class="row">
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>{{ $biodata->birth_date ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{{ $biodata->website ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>{{ $biodata->phone ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{ $biodata->address ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong>
+                                        <span>{{ $biodata->birth_date ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong>
+                                        <span>{{ $biodata->website ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong>
+                                        <span>{{ $biodata->phone ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong>
+                                        <span>{{ $biodata->address ?? '' }}</span></li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{{ $biodata->age ?? '' }}</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ $biodata->degree ?? '' }}</span>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong>
+                                        <span>{{ $biodata->age ?? '' }}</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong>
+                                        <span>{{ $biodata->degree ?? '' }}</span>
                                     </li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
                                         <span>{{ $biodata->email ?? '' }}</span>
@@ -160,22 +162,17 @@
                                 </ul>
                             </div>
                             <div class="signature mt-4">
-                <div class="signature-image">
-                  <img src="{{ asset('assets/img/signature.png') }}" alt="Signature" class="img-fluid">
-                </div>
-                <div class="signature-info">
-                  <h4>{{ $biodata->name ?? '' }}</h4>
-                  <p>Student, Indonesia</p>
-                </div>
-              </div>
+                                <div class="signature-image">
+                                    <img src="{{ asset('assets/img/ttd amel.jpg') }}" alt="Signature"
+                                        class="img-fluid">
+                                </div>
+                                <div class="signature-info">
+                                    <h4>{{ $biodata->name ?? '' }}</h4>
+                                    <p>Student, Indonesia</p>
+                                </div>
+                            </div>
 
                         </div>
-                        <p class="py-3">
-                            “We're all like fireworks: we climb, we shine and always go our separate ways and become
-                            further apart. But even if that time comes, let’s not disappear like a firework and continue
-                            to shine… forever.”<br>
-                            - Bleach
-                        </p>
                     </div>
                 </div>
 
@@ -185,106 +182,78 @@
 
         @auth
 
-<div id="biodataModal" class="modal-overlay">
-    <div class="modal-box">
-        <span class="modal-close" onclick="closeBiodataModal()">&times;</span>
+            <div id="biodataModal" class="modal-overlay">
+                <div class="modal-box">
+                    <span class="modal-close" onclick="closeBiodataModal()">&times;</span>
 
-        <h2 id="modalBiodataTitle">Tambah/Edit Biodata</h2>
+                    <h2 id="modalBiodataTitle">Tambah/Edit Biodata</h2>
 
-        <form id="biodata-form" method="POST" action="{{ $biodata ? route('biodata.update', $biodata->id) : route('biodata.store') }}" enctype="multipart/form-data">
-            @csrf
-            @if($biodata)
-                @method('PATCH') {{-- Gunakan PATCH agar konsisten --}}
-            @endif
+                    <form id="biodata-form" method="POST"
+                        action="{{ $biodata ? route('biodata.update', $biodata->id) : route('biodata.store') }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @if ($biodata)
+                            @method('PATCH') {{-- Gunakan PATCH agar konsisten --}}
+                        @endif
 
-            <div class="modal-body">
-                <label>Foto:</label>
-                <input type="file" name="pic" class="form-input"><br><br>
+                        <div class="modal-body">
+                            <label>Foto:</label>
+                            <input type="file" name="pic" class="form-input"><br><br>
 
-                <label>Nama:</label>
-                <input type="text" name="name" value="{{ old('name', $biodata->name ?? '') }}" class="form-input">
+                            <label>Nama:</label>
+                            <input type="text" name="name" value="{{ old('name', $biodata->name ?? '') }}"
+                                class="form-input">
 
-                <label>Bio:</label>
-                <textarea name="bio" rows="3" class="form-input">{{ old('bio', $biodata->bio ?? '') }}</textarea>
+                            <label>Bio:</label>
+                            <textarea name="bio" rows="3" class="form-input">{{ old('bio', $biodata->bio ?? '') }}</textarea>
 
-                <label>Birth Date:</label>
-                <input type="date" name="birth_date" value="{{ old('birth_date', $biodata->birth_date ?? '') }}" class="form-input">
+                            <label>Birth Date:</label>
+                            <input type="date" name="birth_date"
+                                value="{{ old('birth_date', $biodata->birth_date ?? '') }}" class="form-input">
 
-                <label>Age:</label>
-                <input type="number" name="age" value="{{ old('age', $biodata->age ?? '') }}" class="form-input">
+                            <label>Age:</label>
+                            <input type="number" name="age" value="{{ old('age', $biodata->age ?? '') }}"
+                                class="form-input">
 
-                <label>Website:</label>
-                <input type="text" name="website" value="{{ old('website', $biodata->website ?? '') }}" class="form-input">
+                            <label>Website:</label>
+                            <input type="text" name="website" value="{{ old('website', $biodata->website ?? '') }}"
+                                class="form-input">
 
-                <label>Degree:</label>
-                <input type="text" name="degree" value="{{ old('degree', $biodata->degree ?? '') }}" class="form-input">
+                            <label>Degree:</label>
+                            <input type="text" name="degree" value="{{ old('degree', $biodata->degree ?? '') }}"
+                                class="form-input">
 
-                <label>Phone:</label>
-                <input type="text" name="phone" value="{{ old('phone', $biodata->phone ?? '') }}" class="form-input">
+                            <label>Phone:</label>
+                            <input type="text" name="phone" value="{{ old('phone', $biodata->phone ?? '') }}"
+                                class="form-input">
 
-                <label>Email:</label>
-                <input type="email" name="email" value="{{ old('email', $biodata->email ?? '') }}" class="form-input">
+                            <label>Email:</label>
+                            <input type="email" name="email" value="{{ old('email', $biodata->email ?? '') }}"
+                                class="form-input">
 
-                <label>Address:</label>
-                <input type="text" name="address" value="{{ old('address', $biodata->address ?? '') }}" class="form-input">
+                            <label>Address:</label>
+                            <input type="text" name="address" value="{{ old('address', $biodata->address ?? '') }}"
+                                class="form-input">
 
-                <label>Freelance:</label>
-                <input type="text" name="freelance" value="{{ old('freelance', $biodata->freelance ?? '') }}" class="form-input">
+                            <label>Freelance:</label>
+                            <input type="text" name="freelance"
+                                value="{{ old('freelance', $biodata->freelance ?? '') }}" class="form-input">
 
-                <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾 Simpan</button>
+                            <br><button type="submit" class="open-profile-btn" style="width: 100%; margin-top: 15px;">💾
+                                Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-    </div>
-</div>
 
-@endauth
+        @endauth
 
         <!-- Stats Section -->
-        <section id="stats" class="stats section">
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                <div class="row gy-4">
+        </div>
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item">
-                            <i class="bi bi-emoji-smile"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="1" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>Year</strong> <span>as a college student</span></p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item">
-                            <i class="bi bi-journal-richtext"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="21" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>+ Assignment</strong> <span>submitted</span></p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item">
-                            <i class="bi bi-headset"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="13" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>+ Story game</strong> <span>cleared</span></p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item">
-                            <i class="bi bi-people"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>+ Friends</strong> <span>in life</span></p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                </div>
-
-            </div>
+        </div>
 
         </section><!-- /Stats Section -->
 
@@ -294,7 +263,8 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Skills</h2>
-                <p>Some list of my skills, and this will continue to grow</p>
+                <p>Saya percaya bahwa belajar adalah proses tanpa akhir. Inilah skill yang telah saya pelajari dan terus
+                    saya asah untuk tumbuh sebagai talenta digital yang siap bersaing.</p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -306,7 +276,7 @@
                         <div class="progress">
                             <span class="skill"><span>HTML</span> <i class="val">70%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div><!-- End Skills Item -->
@@ -314,7 +284,7 @@
                         <div class="progress">
                             <span class="skill"><span>CSS</span> <i class="val">70%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div><!-- End Skills Item -->
@@ -322,7 +292,7 @@
                         <div class="progress">
                             <span class="skill"><span>Wordpress</span> <i class="val">80%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div><!-- End Skills Item -->
@@ -334,7 +304,7 @@
                         <div class="progress">
                             <span class="skill"><span>Figma</span> <i class="val">80%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div><!-- End Skills Item -->
@@ -348,9 +318,9 @@
                         </div><!-- End Skills Item -->
 
                         <div class="progress">
-                            <span class="skill"><span>Photoshop</span> <i class="val">15%</i></span>
+                            <span class="skill"><span>Photoshop</span> <i class="val">70%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                         </div><!-- End Skills Item -->
@@ -364,7 +334,7 @@
         </section><!-- /Skills Section -->
 
         <!-- Resume Section -->
-        <section id="resume" class="resume section">
+        <section id="Experience" class="resume section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -380,30 +350,30 @@
                         <h3 class="resume-title">English Club</h3>
 
                         <div class="resume-item pb-0">
-                                <li>Telling Story</li>
-                                <li>Hafalan Verb1, verb2, verb3 100 kata</li>
-                                <li>Dan lain sebagainya</li>
+                            <li>Telling Story</li>
+                            <li>Hafalan Verb1, verb2, verb3 100 kata</li>
+                            <li>Dan lain sebagainya</li>
                             </ul>
                         </div><!-- Edn Resume Item -->
 
                         <h3 class="resume-title">Delegasi Pertukaran Pemuda Asia Chapter Bali</h3>
                         <div class="resume-item pb-0">
-                                <li>Mangrove Ecotourism and Research Project</li>
-                                <li>Creative Economy and Market Research</li>
-                                <li>Sea Turtle Conservation and Releases Project</li>
-                                <li>outh Congress and Awards 2022</li>
-                                <li>Rumah Kompos Innovative Organic Agriculture Project</li>
-                                <li>Uluwatu Temple Excursion</li>
+                            <li>Mangrove Ecotourism and Research Project</li>
+                            <li>Creative Economy and Market Research</li>
+                            <li>Sea Turtle Conservation and Releases Project</li>
+                            <li>outh Congress and Awards 2022</li>
+                            <li>Rumah Kompos Innovative Organic Agriculture Project</li>
+                            <li>Uluwatu Temple Excursion</li>
                             </ul>
                         </div><!-- Edn Resume Item -->
 
                         <h3 class="resume-title">Mengikuti Pelatihan IT SUPPORT GOOGLE COURSERA</h3>
                         <div class="resume-item pb-0">
-                                <li>Dasar Dasar Dukungan Teknis</li>
-                                <li>Seluk Beluk Jaringan Komputer</li>
-                                <li>Sistem Operasi</li>
-                                <li>Administrasi Sistem dan Layanan Infrastruktur TI</li>
-                                <li>Keamanan IT</li>
+                            <li>Dasar Dasar Dukungan Teknis</li>
+                            <li>Seluk Beluk Jaringan Komputer</li>
+                            <li>Sistem Operasi</li>
+                            <li>Administrasi Sistem dan Layanan Infrastruktur TI</li>
+                            <li>Keamanan IT</li>
                             </ul>
                         </div><!-- Edn Resume Item -->
                     </div>
@@ -415,26 +385,30 @@
                                 <li>Pengurusan Hak Cipta Karya Ilmiah dan Produk Institusi</li>
                                 <li>Dukungan Akreditasi Program Studi</li>
                                 <li>Pendukung Penelitian dan Pengabdian Dosen</li>
-                                <li>Teknis Pelaksanaan Kegiatan, Membantu menyiapkan acara seminar, pelatihan, sosialisasi, atau workshop LPPM, Mengelola registrasi peserta, konsumsi, absensi, dan sertifikat, Membantu publikasi kegiatan (poster, website, dsb).</li>
+                                <li>Teknis Pelaksanaan Kegiatan, Membantu menyiapkan acara seminar, pelatihan,
+                                    sosialisasi, atau workshop LPPM, Mengelola registrasi peserta, konsumsi, absensi,
+                                    dan sertifikat, Membantu publikasi kegiatan (poster, website, dsb).</li>
                             </ul>
                         </div><!-- Edn Resume Item -->
 
                         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="resume-title">Guru Les Privat, Mandiri / Freelance</h3>
-                        <div class="resume-item">
-                            <ul>
-                                <li>Memberikan bimbingan belajar kepada siswa tingkat SD</li>
-                                <li>Menyesuaikan metode pengajaran dengan gaya belajar masing-masing siswa untuk meningkatkan pemahaman dan hasil belajar</li>
-                                <li>Meningkatkan kemampuan komunikasi, manajemen waktu, dan kesabaran dalam menghadapi berbagai karakter siswa</li>
-                                <li>Menjadi role model dalam kedisiplinan dan semangat belajar.</li>
-                            </ul>
-                        </div><!-- Edn Resume Item -->
+                            <h3 class="resume-title">Guru Les Privat, Mandiri / Freelance</h3>
+                            <div class="resume-item">
+                                <ul>
+                                    <li>Memberikan bimbingan belajar kepada siswa tingkat SD</li>
+                                    <li>Menyesuaikan metode pengajaran dengan gaya belajar masing-masing siswa untuk
+                                        meningkatkan pemahaman dan hasil belajar</li>
+                                    <li>Meningkatkan kemampuan komunikasi, manajemen waktu, dan kesabaran dalam
+                                        menghadapi berbagai karakter siswa</li>
+                                    <li>Menjadi role model dalam kedisiplinan dan semangat belajar.</li>
+                                </ul>
+                            </div><!-- Edn Resume Item -->
+
+                        </div>
 
                     </div>
 
                 </div>
-
-            </div>
 
         </section><!-- /Resume Section -->
 
@@ -445,9 +419,9 @@
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Portfolio</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p>Selama perjalanan saya sebagai mahasiswa Informatika, saya telah mengerjakan berbagai proyek dari
+                        tugas kuliah hingga freelance. Portofolio ini berisi hasil nyata dari pembelajaran dan
+                        pengembangan diri saya di bidang teknologi.</p>
                 </div><!-- End Section Title -->
 
                 <!-- Notifikasi Sukses/Hapus -->
@@ -490,7 +464,7 @@
                             <li data-filter="*" class="filter-active">All</li>
                             <li data-filter=".filter-app">App</li>
                             <li data-filter=".filter-product">Product</li>
-                            <li data-filter=".filter-branding">Branding</li>
+                            <li data-filter=".filter-certificate">Certificate</li>
                             <li data-filter=".filter-books">Books</li>
                         </ul><!-- End Portfolio Filters -->
 
@@ -510,6 +484,11 @@
                                                 <a href="{{ asset('storage/' . $item->image) }}" title="App 1"
                                                     data-gallery="portfolio-gallery-app"
                                                     class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#portfolioModal-{{ $item->id }}"
+                                                    title="More Details" class="details-link">
+                                                    <i class="bi bi-link-45deg"></i>
+                                                </a>
                                                 @auth
                                                     <button type="button" class="btn btn-warning btn-sm" title="Edit"
                                                         onclick="editItem({{ $item->id }}, '{{ $item->title }}', '{{ $item->description }}', '{{ $item->image }}', '{{ $item->category }}')">
@@ -545,12 +524,13 @@
             </section><!-- /Portfolio Section -->
 
             @auth
+                <!-- Modal Tambah/Edit Portfolio -->
                 <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-title"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h3 class="modal-title w-100" id="modal-title">Add/Edit</h3>
+                                <h3 class="modal-title w-100" id="modal-title">Add/Edit Portfolio</h3>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                     onclick="closeModal()"></button>
                             </div>
@@ -571,16 +551,15 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="item-image" class="form-label">Image</label>
-                                        <input type="file" name="image" placeholder="Image" id="item-image"
-                                            class="form-control">
+                                        <input type="file" name="image" id="item-image" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label for="item-category" class="form-label">Category</label>
                                         <select name="category" id="item-category" class="form-select">
-                                            <option value="app">app</option>
-                                            <option value="product">product</option>
-                                            <option value="branding">branding</option>
-                                            <option value="books">books</option>
+                                            <option value="app">App</option>
+                                            <option value="product">Product</option>
+                                            <option value="certificate">Certificate</option>
+                                            <option value="books">Books</option>
                                         </select>
                                     </div>
                                 </div>
@@ -594,7 +573,61 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Galeri Portofolio -->
+                <!-- <div class="container mt-5">
+                    <h3 class="mb-4">Portofolio Anda</h3>
+                    <div class="row">
+                        @foreach ($items as $item)
+                            <div class="col-md-3 mb-4">
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}"
+                                    class="img-fluid rounded shadow-sm" style="cursor: pointer;"
+                                    onclick="showItemDetail(`{{ asset('storage/' . $item->image) }}`, `{{ $item->title }}`, `{{ $item->description }}`, `{{ $item->category }}`)">
+                            </div>
+                        @endforeach
+                    </div>
+                </div> -->
+
+                <!-- Modal Deskripsi Detail -->
+                <div class="modal fade" id="modal-desc" tabindex="-1" aria-labelledby="modal-desc-label"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Detail Portofolio</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img id="desc-image" src="" class="img-fluid rounded mb-3"
+                                    style="max-height: 300px;" alt="Gambar">
+                                <h4 id="desc-title"></h4>
+                                <p id="desc-description" class="text-muted"></p>
+                                <span class="badge bg-primary" id="desc-category"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Script Modal Interaksi -->
+                <script>
+                    function showItemDetail(imageUrl, title, description, category) {
+                        document.getElementById('desc-image').src = imageUrl;
+                        document.getElementById('desc-title').innerText = title;
+                        document.getElementById('desc-description').innerText = description;
+                        document.getElementById('desc-category').innerText = category;
+
+                        const modal = new bootstrap.Modal(document.getElementById('modal-desc'));
+                        modal.show();
+                    }
+
+                    function closeModal() {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('modal-form'));
+                        if (modal) modal.hide();
+                    }
+                </script>
             @endauth
+
 
 
             <!-- Modal Konfirmasi Delete -->
@@ -640,10 +673,11 @@
                         <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
                             <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
                             <div>
-                                <h4 class="title"><a href="service-details.html" class="stretched-link">Lorem
-                                        Ipsum</a></h4>
-                                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas
-                                    molestias excepturi sint occaecati cupiditate non provident</p>
+                                <h4 class="title"><a href="service-details.html" class="stretched-link">Desain
+                                        Grafis & UI/UX</a></h4>
+                                <p class="description">Mendesain tampilan website, aplikasi, dan konten visual
+                                    menggunakan Canva atau Figma agar menarik, intuitif, dan sesuai tren UI/UX masa
+                                    kini.</p>
                             </div>
                         </div>
                         <!-- End Service Item -->
@@ -651,50 +685,41 @@
                         <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
                             <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
                             <div>
-                                <h4 class="title"><a href="service-details.html" class="stretched-link">Dolor
-                                        Sitema</a></h4>
-                                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                    aliquip ex ea commodo consequat tarad limino ata</p>
+                                <h4 class="title"><a href="service-details.html" class="stretched-link">Jaringan
+                                        Komputer</a></h4>
+                                <p class="description">Desain dan simulasi jaringan komputer menggunakan Cisco Packet
+                                    Tracer. Termasuk konfigurasi routing, server, dan keamanan jaringan dasar. Cocok
+                                    untuk simulasi perusahaan, kampus, atau rumah sakit.</p>
                             </div>
                         </div><!-- End Service Item -->
 
                         <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
                             <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
                             <div>
-                                <h4 class="title"><a href="service-details.html" class="stretched-link">Sed ut
-                                        perspiciatis</a></h4>
-                                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur</p>
+                                <h4 class="title"><a href="service-details.html" class="stretched-link">Data Entry &
+                                        Pengolahan Data</a></h4>
+                                <p class="description">Mengolah dan membersihkan data menggunakan Excel, Google Sheets,
+                                    atau tools sederhana lainnya. Cocok untuk admin data, penelitian, atau UMKM.</p>
                             </div>
                         </div><!-- End Service Item -->
 
                         <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="400">
                             <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
                             <div>
-                                <h4 class="title"><a href="service-details.html" class="stretched-link">Magni
-                                        Dolores</a></h4>
-                                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                                    qui officia deserunt mollit anim id est laborum</p>
+                                <h4 class="title"><a href="service-details.html"
+                                        class="stretched-link">WordPress</a></h4>
+                                <p class="description">Mengoperasikan Wordpress LPPM Itsk Dr Soepraoen</p>
                             </div>
                         </div><!-- End Service Item -->
 
                         <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="500">
                             <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
                             <div>
-                                <h4 class="title"><a href="service-details.html" class="stretched-link">Nemo
-                                        Enim</a></h4>
-                                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                                    blanditiis praesentium voluptatum deleniti atque</p>
-                            </div>
-                        </div><!-- End Service Item -->
-
-                        <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="600">
-                            <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
-                            <div>
-                                <h4 class="title"><a href="service-details.html" class="stretched-link">Eiusmod
-                                        Tempor</a></h4>
-                                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam
-                                    libero tempore, cum soluta nobis est eligendi</p>
+                                <h4 class="title"><a href="service-details.html" class="stretched-link">Editing Foto
+                                        & Desain Konten Sosial Media</a></h4>
+                                <p class="description">Membuat dan mengedit konten visual seperti poster, feed
+                                    Instagram, banner promosi, dan kebutuhan branding lainnya, menggunakan Canva,
+                                    Photoshop, atau Figma.</p>
                             </div>
                         </div><!-- End Service Item -->
 
@@ -826,7 +851,8 @@
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Contact</h2>
-                    <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                    <p>Terima kasih telah mengunjungi portofolio saya. Jika Anda memiliki pertanyaan, segera hubungi
+                        saya.</p>
                 </div><!-- End Section Title -->
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -840,7 +866,7 @@
                                     <i class="bi bi-geo-alt flex-shrink-0"></i>
                                     <div>
                                         <h3>Address</h3>
-                                        <p>A108 Adam Street, New York, NY 535022</p>
+                                        <p>Malang, Jawa Timur, Indonesia</p>
                                     </div>
                                 </div><!-- End Info Item -->
 
@@ -848,22 +874,18 @@
                                     <i class="bi bi-telephone flex-shrink-0"></i>
                                     <div>
                                         <h3>Call Us</h3>
-                                        <p>+1 5589 55488 55</p>
+                                        <p>085815368296</p>
                                     </div>
                                 </div><!-- End Info Item -->
 
                                 <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                                     <i class="bi bi-envelope flex-shrink-0"></i>
                                     <div>
-                                        <h3>Email Us</h3>
-                                        <p>info@example.com</p>
+                                        <h3>Email</h3>
+                                        <p>nabilacamelia50@gmail.com</p>
                                     </div>
                                 </div><!-- End Info Item -->
 
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
-                                    frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen=""
-                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
 
@@ -950,6 +972,71 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    @foreach ($items as $item)
+        <div class="modal fade" id="portfolioModal-{{ $item->id }}" tabindex="-1"
+            aria-labelledby="portfolioModalLabel-{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="portfolioModalLabel-{{ $item->id }}">
+                            {{ $item->title ?? '' }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <section id="portfolio-details" class="portfolio-details section">
+                            <div class="container">
+                                <div class="row gy-4">
+                                    <div class="col-lg-8">
+                                        <div class="portfolio-details-slider swiper">
+                                            <div class="swiper-wrapper align-items-center">
+                                                <div class="swiper-slide">
+                                                    <img src="{{ asset('storage/' . $item->image) }}"
+                                                        alt="{{ $item->title }}" class="img-fluid"
+                                                        style="max-height: 400px; object-fit: contain;">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="portfolio-info">
+                                            <h3>Project information</h3>
+                                            <ul>
+                                                <li><strong>Category</strong>: {{ $item->category }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="portfolio-description">
+                                            <h2>{{ $item->title }}</h2>
+                                            <p>{{ $item->description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.swiper', {
+                loop: true,
+                speed: 600,
+                autoplay: {
+                    delay: 5000,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets',
+                    clickable: true,
+                }
+            });
+        });
+    </script>
 
     <script>
         function openProfileModal() {
@@ -1070,21 +1157,21 @@
         });
     </script>
 
-<script>
-    function openBiodataModal(mode) {
-        document.getElementById('biodataModal').style.display = 'block';
-        document.getElementById('modalBiodataTitle').innerText = mode === 'edit' ? 'Edit Biodata' : 'Tambah Biodata';
-    }
+    <script>
+        function openBiodataModal(mode) {
+            document.getElementById('biodataModal').style.display = 'block';
+            document.getElementById('modalBiodataTitle').innerText = mode === 'edit' ? 'Edit Biodata' : 'Tambah Biodata';
+        }
 
-    function closeBiodataModal() {
-        document.getElementById('biodataModal').style.display = 'none';
-    }
+        function closeBiodataModal() {
+            document.getElementById('biodataModal').style.display = 'none';
+        }
 
-    window.onclick = function(e) {
-        const modal = document.getElementById('biodataModal');
-        if (e.target === modal) modal.style.display = 'none';
-    }
-</script>
+        window.onclick = function(e) {
+            const modal = document.getElementById('biodataModal');
+            if (e.target === modal) modal.style.display = 'none';
+        }
+    </script>
 
 </body>
 
