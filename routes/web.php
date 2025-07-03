@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/{view?}', [portofolioController::class, 'index'])->name('view')->where('view', 'portfolio|home');
 
+Route::post('/contact', [App\Http\Controllers\ContacController::class, 'store'])->name('contact.store');
 
+Route::get('/contact', [App\Http\Controllers\ContacController::class, 'index'])->name('contact.index');
 
 require __DIR__.'/auth.php';

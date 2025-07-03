@@ -54,6 +54,9 @@ class ProfileController extends Controller
             'portfolios.*.description' => 'required_with:portfolios|string',
             'portfolios.*.image' => 'nullable|string',
             'portfolios.*.category' => 'nullable|string',
+            'portfolios.*.project_date' => 'nullable|string',
+            'portfolios.*.link' => 'nullable|string',
+            'portfolios.*.client' => 'nullable|string',
         ]);
         $profile = Profile::updateOrCreate(['email' => $data['email']], $data);
         // Import portfolios jika ada

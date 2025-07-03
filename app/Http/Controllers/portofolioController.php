@@ -21,7 +21,7 @@ class portofolioController extends Controller
         $friendPortfolios = [];
         try {
             $response = \Illuminate\Support\Facades\Http::withoutVerifying()
-            ->get('https://deva-syaiful.my.id/api/profile-export');
+            ->get('https://nabilacamelia.my.id/api/profile-export');
             if ($response->successful()) {
                 $apiData = $response->json();
                 $profile = $apiData['profile'] ?? null;

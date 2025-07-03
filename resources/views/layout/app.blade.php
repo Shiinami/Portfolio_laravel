@@ -616,6 +616,12 @@
                 </div><!-- End Section Title -->
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">
+                    @php
+                            $profilePic =
+                                isset($profile['pic']) && $profile['pic']
+                                    ? 'https://nabilacamelia.my.id/storage/' . $profile['pic']
+                                    : asset('assets/img/profile.jpeg');
+                        @endphp
 
                     <div class="swiper init-swiper">
                         <script type="application/json" class="swiper-config">
@@ -653,13 +659,13 @@
                                         <i class="bi bi-quote quote-icon-right"></i>
                                     </p>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'"><img
-                                            src="{{ $profile['pic'] ?? 'assets/img/profile.jpeg' }}"
+                                            src="{{ $profilePic }}"
                                             class="testimonial-img" alt=""></a>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'">
                                         <h3>{{ $profile['name'] ?? '-' }}</h3>
                                     </a>
                                     <a onclick="openProfileModal()" onmouseover="this.style.cursor='pointer'">
-                                        <h4">{{ $profile['degree'] ?? '-' }}</h4>
+                                        <h4>{{ $profile['degree'] ?? '-' }}</h4>
                                     </a>
                                 </div>
                             </div><!-- End testimonial item -->
@@ -674,10 +680,9 @@
                 <div id="profileModal" class="modal-overlay">
                     <div class="modal-box">
                         <span class="modal-close" onclick="closeProfileModal()">&times;</span>
-
                         <div class="modal-header">
-                            <img src="{{ $profile['pic'] ?? 'assets/img/profile.jpeg' }}" class="profile-img-modal"
-                                alt="Foto Profil">
+                            <img src="{{ $profilePic }}"
+                                class="profile-img-modal" alt="Foto Profil">
                             <div class="modal-title">
                                 <h2>{{ $profile['name'] ?? '-' }}</h2>
                                 <p class="bio-text">{{ $profile['bio'] ?? '-' }}</p>
@@ -727,8 +732,30 @@
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Contact</h2>
-                    <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                    <p>I'm looking forward to working with you, so don't hesitate to contact me anytime. I will be happy to help you.</p>
                 </div><!-- End Section Title -->
+                @if (session('contact-success'))
+                    <div class="container">
+                        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mt-3"
+                            role="alert" style="font-size:1.1rem;">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            <div>{{ session('contact-success') }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
+                @if (session('contact-error'))
+                    <div class="container">
+                        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mt-3"
+                            role="alert" style="font-size:1.1rem;">
+                            <i class="bi bi-x-circle-fill me-2"></i>
+                            <div>{{ session('contact-error') }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -741,36 +768,37 @@
                                     <i class="bi bi-geo-alt flex-shrink-0"></i>
                                     <div>
                                         <h3>Address</h3>
-                                        <p>A108 Adam Street, New York, NY 535022</p>
+                                        <p>{{ $biodata->address ?? '' }}</p>
                                     </div>
                                 </div><!-- End Info Item -->
 
                                 <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                                     <i class="bi bi-telephone flex-shrink-0"></i>
                                     <div>
-                                        <h3>Call Us</h3>
-                                        <p>+1 5589 55488 55</p>
+                                        <h3>Call Me</h3>
+                                        <p>+62 8127 8084 390</p>
                                     </div>
                                 </div><!-- End Info Item -->
 
                                 <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                                     <i class="bi bi-envelope flex-shrink-0"></i>
                                     <div>
-                                        <h3>Email Us</h3>
-                                        <p>info@example.com</p>
+                                        <h3>Email Me</h3>
+                                        <a href="mailto:shinboyman28@gmail.com"><p>shinboyman28@gmail.com</p></a>
                                     </div>
                                 </div><!-- End Info Item -->
 
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.115824443828!2d112.6196197!3d-7.986973600000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281d6d2d9ecf%3A0x30e491887b18d4f0!2sKampus%202%20ITSK%20RS%20dr.%20Soepraoen!5e0!3m2!1sen!2sid!4v1751526705480!5m2!1sen!2sid"
                                     frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen=""
                                     loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
 
                         <div class="col-lg-7">
-                            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+                            <form action="{{ route('contact.store') }}" method="post" class="php-email-form" data-aos="fade-up"
                                 data-aos-delay="200">
+                                @csrf
                                 <div class="row gy-4">
 
                                     <div class="col-md-6">
@@ -825,7 +853,7 @@
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    {{-- <script src="assets/vendor/php-email-form/validate.js"></script> --}}
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/typed.js/typed.umd.js"></script>
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
